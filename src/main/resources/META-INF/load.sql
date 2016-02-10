@@ -1,0 +1,1 @@
+insert into CUSTOMER(ID, EMAIL, PASSWORD) VALUES (1, 'fpi@bk.ru', '123123')
