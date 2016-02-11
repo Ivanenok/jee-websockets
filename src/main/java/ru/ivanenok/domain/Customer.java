@@ -18,7 +18,7 @@ public class Customer implements Serializable {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<AuthToken> tokens = new ArrayList<>();
 
     public Customer() {

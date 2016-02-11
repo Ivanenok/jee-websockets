@@ -7,13 +7,10 @@ import ru.ivanenok.util.TimeService;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -33,11 +30,9 @@ public class AuthTokenManager {
         query.setParameter("password", password);
         List<Customer> resultList = query.getResultList();
         if (!resultList.isEmpty()) {
-            Customer customer = resultList.get(0);
             LocalDateTime now = TimeService.now();
-            authToken = new AuthToken(now, now.plusDays(1), UUID.randomUUID().toString());
-            customer.getTokens().add(authToken);
-            em.merge(customer);
+            authToken = new AuthToken(now, now.plusDays(1), UUID.randomUUID().toString(), resultList.get(0));
+            em.persist(authToken);
         } else {
             throw new CustomerNotFound();
         }

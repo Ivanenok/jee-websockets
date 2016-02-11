@@ -1,14 +1,8 @@
 package ru.ivanenok.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Created by ivanenok on 2/10/16.
@@ -25,13 +19,26 @@ public class AuthToken implements Serializable {
 
     private String token;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public AuthToken() {
     }
 
-    public AuthToken(LocalDateTime created, LocalDateTime expired, String token) {
+    public AuthToken(LocalDateTime created, LocalDateTime expired, String token, Customer customer) {
         this.created = created;
         this.expired = expired;
         this.token = token;
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getId() {
