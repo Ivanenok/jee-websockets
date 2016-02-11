@@ -20,7 +20,6 @@ public class AuthToken implements Serializable {
     private String token;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public AuthToken() {

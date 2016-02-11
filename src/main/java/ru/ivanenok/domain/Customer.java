@@ -18,6 +18,7 @@ public class Customer implements Serializable {
 
     private String password;
 
+    //should be removed for huge count of tokens
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<AuthToken> tokens = new ArrayList<>();
 
